@@ -10,7 +10,15 @@ const getItem = (req, reply) => {
    })
 }
 
+const addItem = (req, reply) => {
+   const name = req.body.name
+   console.log(name)
+
+   reply.send(name)
+}
+
 module.exports = {
    getItems,
-   getItem
+   getItem,
+   addItem,
 }

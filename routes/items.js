@@ -1,4 +1,4 @@
-const {getItems, getItem} = require('../controller/items');
+const {getItems, getItem, addItem} = require('../controller/items');
 
 function itemRoutes(fastify, options, done) {
 
@@ -24,6 +24,8 @@ function itemRoutes(fastify, options, done) {
 
    //adding params
    fastify.get('/items/:id', getItem)
+
+   fastify.post('/items', addItem)
 
    done();
 }
