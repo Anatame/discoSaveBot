@@ -4,18 +4,7 @@ const config = require('./config.json');
 const PORT = 5000;
 
 const fastify = require('fastify')({ logger: true })
-
-fastify.get('/items', (req, reply) => {
-	reply.send({test: "Hello"})
-})
-
-//adding params
-fastify.get('/items:id', (req, reply) => {
-
-	const id = req.params.id
-
-	reply.send({test: "Hello"})
-})
+fastify.register(require('./routes/items'))
 
 const start = async () => {
 	try {
