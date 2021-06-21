@@ -1,20 +1,29 @@
+const {getItems, getItem} = require('../controller/items');
+
 function itemRoutes(fastify, options, done) {
 
-   fastify.get('/items', (req, reply) => {
-      reply.send({
-         test: "Hello"
-      })
-   })
+   //Options for get all 
+   const getItemsOpts = {
+      schema: {
+         response: {
+            200: {
+               type: 'array',
+               items: {
+                  type: 'object',
+                  properties: {
+                     id: { type: 'string' },
+                     name: { type: 'string' }
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   fastify.get('/items', getItems)
 
    //adding params
-   fastify.get('/items/:id', (req, reply) => {
-
-      const id = req.params.id
-
-      reply.send({
-         test: id
-      })
-   })
+   fastify.get('/items/:id', getItem)
 
    done();
 }
