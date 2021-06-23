@@ -16,7 +16,7 @@ client.on("guildDelete", guild => { // This event fires when a guild is created 
 
 module.exports = {client};
 
-fastify.register(require('./routes/items'))
+fastify.register(require('./routes/users'))
 
 const start = async () => {
 	try {
