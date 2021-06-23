@@ -9,6 +9,10 @@ client.on("guildCreate", guild => { // This event fires when a guild is created 
 	});
 });
 
+client.on("guildDelete", guild => { // This event fires when a guild is created or when the bot is added to a guild.
+	console.log(`Kicked from ${guild.id}`)
+});
+
 
 module.exports = {client};
 
