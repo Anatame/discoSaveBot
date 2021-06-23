@@ -1,9 +1,8 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/discoSave',  {useUnifiedTopology:true, useNewUrlParser:true});
 
-const MessageConfigSchema = new mongoose.Schema({
-   message: {
-         type: 'string',
-   }
+const userSchema = new mongoose.Schema({
+      id: Number,
 })
 
-module.exports = mongoose.model("MessageConfig", MessageConfigSchema)
+module.exports = mongoose.model("User", userSchema)
