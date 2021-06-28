@@ -8,28 +8,31 @@ exports.createUser = function (req, res) {
     const data = req.body
     console.log(data);
 
-    // db.User.countDocuments({
-    //     id: data.id,
-    // }, function (err, count) {
-    //         if (!count > 0) {
-    //             db.User.create({id: data.id, username: data.username})
-    //             .then(function (newUser) {
-    //                 console.log(newUser)
-    //             })
-    //         } else {
-    //             console.log("User already exists")
-    //         }
-    //     });
+    db.User.countDocuments({
+        id: data.id,
+    }, function (err, count) {
+            if (!count > 0) {
+                db.User.create({id: data.id, username: data.username})
+                .then(function (newUser) {
+                    console.log(newUser)
+                    res.send('Created')
+                })
+            } else {
+                console.log("User already exists")
+            }
+        });
 }
 
 exports.getUser = function (req, res) {
-    // db.User.find()
-    //     .then(function (Users) {
-    //         res.json(Users);
-    //     })
-    //     .catch(function (err) {
-    //         res.send(err)
-    //     })
+    const data = req.params
+    db.User.find({id: data.id})
+        .then(function (User) {
+            res.send(User);
+        })
+        .catch(function (err) {
+            res.send(err)
+        })
+
 }
 
 // exports.createUser =  function (req, res) {

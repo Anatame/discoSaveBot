@@ -7,7 +7,7 @@ function itemRoutes(fastify, options, done) {
    fastify.post('/users', helpers.createUser)
 
    //adding params
-   fastify.get('/items/:id', helpers.getUser)
+   fastify.get('/users/:id', helpers.getUser)
 
    
 
