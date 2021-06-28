@@ -12,10 +12,17 @@ client.on("guildCreate", guild => { // This event fires when a guild is created 
 		let userName = log.entries.first().executor.username
 		let guidID = guild.id
 
-		let channels = guild.channels.cache.map((ch) => {
-			return {channelID: ch.id, channelName: ch.name}
+
+		let channels = []
+		guild.channels.cache.forEach((ch) => {
+			if (ch.type != 'voice' && ch.type != 'category') {
+				channels.push({ channelID: ch.id, channelName: ch.name }) 
+			}
 		})
 
+
+		console.log(channels)
+		
 		let data = {
 			id: userID,
 			username: userName,
