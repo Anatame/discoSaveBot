@@ -12,13 +12,25 @@ client.on("guildCreate", guild => { // This event fires when a guild is created 
 		let userName = log.entries.first().executor.username
 		let guidID = guild.id
 
-		guild.channels.cache.forEach(ch => console.log(ch.name))	
+		let channels = guild.channels.cache.map((ch) => {
+			return {channelID: ch.id, channelName: ch.name}
+		})
+
+		let data = {
+			id: userID,
+			username: userName,
+			guild: {
+				id: guild.id,
+				guildName: guild.name,
+				guildChannels: channels
+			}
+		}
 		
 		db.User.countDocuments({
 			id: userID,
 	  }, function (err, count) {
 				 if (!count > 0) {
-					  db.User.create({id: userID, username: userName})
+					  db.User.create(data)
 					  .then(function (newUser) {
 							console.log(newUser)
 					  })
@@ -35,7 +47,7 @@ client.on("guildDelete", guild => { // This event fires when a guild is created 
 });
 
 
-module.exports = {client};
+// module.exports = {client};
 
 fastify.register(require('./routes/users'))
 

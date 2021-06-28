@@ -8,6 +8,14 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
     },
+    guild: [{
+        id: { type: Number },
+        guildName: { type: String },
+        guildChannels: [{
+            channelID: { type: Number },
+            channelName: { type: String}
+        }]
+    }]
 
 })
 
