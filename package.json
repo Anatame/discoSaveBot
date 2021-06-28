@@ -1,0 +1,26 @@
+{
+  "name": "discosavebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "fastify": "^3.18.0",
+    "fastify-swagger": "^4.8.0",
+    "mongoose": "^5.12.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anatame/discoSaveBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anatame/discoSaveBot/issues"
+  },
+  "homepage": "https://github.com/Anatame/discoSaveBot#readme"
+}

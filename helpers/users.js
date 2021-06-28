@@ -6,12 +6,13 @@ const db = require('../models');
 exports.createUser = function (req, res) {
     
     const data = req.body
+    console.log(data);
 
-
-    
-        db.User.countDocuments({id: data.id}, function (err, count){ 
+    db.User.countDocuments({
+        id: data.id,
+    }, function (err, count) {
             if (!count > 0) {
-                db.User.create({id: data.id})
+                db.User.create({id: data.id, username: data.username})
                 .then(function (newUser) {
                     console.log(newUser)
                 })

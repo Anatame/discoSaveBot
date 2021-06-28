@@ -4,7 +4,11 @@ const userSchema = new mongoose.Schema({
     id:{
         type: Number,
         required: "Name cannot be blank!"
-    }
+    },
+    username: {
+        type: String,
+    },
+
 })
 
 const User = mongoose.model('User', userSchema);
