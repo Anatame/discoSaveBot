@@ -35,6 +35,12 @@ exports.getUser = function (req, res) {
 
 }
 
+exports.sendMessage = function (req, res) {
+    const data = req.body
+    console.log(data);
+    client.channels.cache.get(data.channel).send(data.messageContent)
+}
+
 // exports.createUser =  function (req, res) {
 //     db.User.create({id: '99'})
 //         .then(function (newUser) {
