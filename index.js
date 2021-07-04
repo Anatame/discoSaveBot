@@ -7,6 +7,8 @@ const fastify = require("fastify")({
 	logger: true
 });
 
+let channels
+
 client.on("guildCreate", (guild) => {
 	// This event fires when a guild is created or when the bot is added to a guild.
 	guild.fetchAuditLogs({
@@ -24,7 +26,7 @@ client.on("guildCreate", (guild) => {
 		let userName = log.entries.first().executor.username;
 		let guidID = guild.id;
 
-		let channels = [];
+		 channels = [];
 		guild.channels.cache.forEach((ch) => {
 			if (ch.type != "voice" && ch.type != "category") {
 				channels.push({
@@ -80,7 +82,25 @@ client.on("guildCreate", (guild) => {
 
 client.on("guildDelete", (guild) => {
 	// This event fires when a guild is created or when the bot is added to a guild.
-	console.log(`Kicked from ${guild.id}`);
+	console.log(`Kicked from ${guild.id} onwer id = ${guild.ownerID}`);
+	
+	db.User.findOneAndUpdate({
+		id: guild.ownerID,
+	}, {
+		$pull: {
+			guild: {
+				id: guild.id,
+			},
+		},
+	}, {
+		new: true,
+		useFindAndModify: false,
+	})
+	.then((data) => {
+		console.log("User updated")
+	});
+
+
 });
 
 // module.exports = {client};
