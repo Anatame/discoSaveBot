@@ -25,14 +25,16 @@ const db = require('../models');
 
 exports.getUser = function (req, res) {
     const data = req.params
-    db.Guild.find({id: data.id})
+    db.Guild.findOne({id: data.id})
         .then(function (Guild) {
-            res.send(Guild);
+            if (Guild) {
+                res.send(Guild);
+            } else {
+                res.send({"id": "notFound"})
+            }
+           
         })
-        .catch(function (err) {
-            res.send(err)
-        })
-
+    
 }
 
 exports.sendMessage = function (req, res) {
