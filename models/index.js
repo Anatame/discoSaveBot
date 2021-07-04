@@ -7,4 +7,4 @@ mongoose.connect("mongodb://localhost/discoSaveBeta", {
 });
 mongoose.Promise = Promise;
 
-module.exports.User = require("./user")
+module.exports.Guild = require("./guild")

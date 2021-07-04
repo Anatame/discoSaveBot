@@ -9,24 +9,10 @@ const fastify = require("fastify")({
 
 let channels
 
-client.on("guildCreate", (guild) => {
-	// This event fires when a guild is created or when the bot is added to a guild.
-	guild.fetchAuditLogs({
-		type: "BOT_ADD",
-		limit: 1
-	}).then((log) => {
-		// Fetching 1 entry from the AuditLogs for BOT_ADD.
-		log.entries
-			.first()
-			.executor.send(`Thank you for adding me to ${guild.name}!`)
-			.catch((e) => console.error(e)); // Sending the message to the executor.
-		console.log(log.entries.first().executor.id);
+client.on("guildCreate", async (guild) => {
 
-		let userID = log.entries.first().executor.id;
-		let userName = log.entries.first().executor.username;
-		let guidID = guild.id;
-
-		 channels = [];
+	
+		channels = [];
 		guild.channels.cache.forEach((ch) => {
 			if (ch.type != "voice" && ch.type != "category") {
 				channels.push({
@@ -39,68 +25,30 @@ client.on("guildCreate", (guild) => {
 		console.log(channels);
 
 		let data = {
-			id: userID,
-			username: userName,
-			guild: {
 				id: guild.id,
 				guildName: guild.name,
 				guildChannels: channels,
-			},
 		};
 
-		db.User.countDocuments({
-				id: userID,
+		db.Guild.countDocuments({
+				id: guild.id,
 			},
 			function (err, count) {
 				if (!count > 0) {
-					db.User.create(data).then(function (newUser) {
-						console.log(newUser);
+					db.Guild.create(data).then(function (newGuild) {
+						console.log(newGuild);
 					});
-				} else {
-					db.User.findOneAndUpdate({
-							id: userID,
-						}, {
-							$push: {
-								guild: {
-									id: guild.id,
-									guildName: guild.name,
-									guildChannels: channels,
-								},
-							},
-						}, {
-							new: true,
-							useFindAndModify: false,
-						})
-						.then((data) => {
-							console.log("User updated")
-						});
-				}
+				} 
 			}
 		);
 	});
-});
 
 client.on("guildDelete", (guild) => {
 	// This event fires when a guild is created or when the bot is added to a guild.
 	console.log(`Kicked from ${guild.id} onwer id = ${guild.ownerID}`);
-	
-	db.User.findOneAndUpdate({
-		id: guild.ownerID,
-	}, {
-		$pull: {
-			guild: {
-				id: guild.id,
-			},
-		},
-	}, {
-		new: true,
-		useFindAndModify: false,
-	})
-	.then((data) => {
-		console.log("User updated")
+	db.Guild.deleteOne({ id: guild.id }, () => {
+		console.log("deleted")
 	});
-
-
 });
 
 // module.exports = {client};

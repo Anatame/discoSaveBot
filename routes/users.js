@@ -4,7 +4,7 @@ function itemRoutes(fastify, options, done) {
 
 
    //Add user when authorization success
-   fastify.post('/users', helpers.createUser)
+   // fastify.post('/users', helpers.createUser)
 
    fastify.post('/users/message', helpers.sendMessage)
 

@@ -3,31 +3,31 @@ const db = require('../models');
 
 
 
-exports.createUser = function (req, res) {
+// exports.createUser = function (req, res) {
     
-    const data = req.body
-    console.log(data);
+//     const data = req.body
+//     console.log(data);
 
-    db.User.countDocuments({
-        id: data.id,
-    }, function (err, count) {
-            if (!count > 0) {
-                db.User.create({id: data.id, username: data.username})
-                .then(function (newUser) {
-                    console.log(newUser)
-                    res.send('Created')
-                })
-            } else {
-                console.log("User already exists")
-            }
-        });
-}
+//     db.Guild.countDocuments({
+//         id: data.id,
+//     }, function (err, count) {
+//             if (!count > 0) {
+//                 db.Guild.create({id: data.id, username: data.username})
+//                 .then(function (newUser) {
+//                     console.log(newUser)
+//                     res.send('Created')
+//                 })
+//             } else {
+//                 console.log("User already exists")
+//             }
+//         });
+// }
 
 exports.getUser = function (req, res) {
     const data = req.params
-    db.User.find({id: data.id})
-        .then(function (User) {
-            res.send(User);
+    db.Guild.find({id: data.id})
+        .then(function (Guild) {
+            res.send(Guild);
         })
         .catch(function (err) {
             res.send(err)
