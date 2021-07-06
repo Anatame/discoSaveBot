@@ -25,7 +25,8 @@ client.on("guildCreate", async (guild) => {
 		console.log(channels);
 
 		let data = {
-				id: guild.id,
+			id: guild.id,
+			icon: guild.iconURL(),
 				guildName: guild.name,
 				guildChannels: channels,
 		};

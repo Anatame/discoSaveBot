@@ -4,7 +4,8 @@ const {Types: {Long}} = mongoose;
 
 const guildSchema = new mongoose.Schema({
 
-        id: { type: Long },
+    id: { type: Long },
+    icon: { type: String},
         guildName: { type: String },
         guildChannels: [{
             channelID: { type: Long },
