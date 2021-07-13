@@ -40,7 +40,11 @@ exports.getUser = function (req, res) {
 exports.sendMessage = function (req, res) {
     const data = req.body
     console.log(data);
-    client.channels.cache.get(data.channel).send(data.messageContent)
+    client.channels.cache.get(data.channel).send(`Username: ${data.messageData.authorUsername}
+
+${data.messageData.message}
+
+${data.messageData.authorAvatar}`)
 }
 
 // exports.createUser =  function (req, res) {
