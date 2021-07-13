@@ -1,4 +1,4 @@
-const {client} = require('../utils/discord.js');
+const {client,  Discord, messageEmbed} = require('../utils/discord.js');
 const db = require('../models');
 
 
@@ -40,11 +40,7 @@ exports.getUser = function (req, res) {
 exports.sendMessage = function (req, res) {
     const data = req.body
     console.log(data);
-    client.channels.cache.get(data.channel).send(`Username: ${data.messageData.authorUsername}
-
-${data.messageData.message}
-
-${data.messageData.authorAvatar}`)
+    client.channels.cache.get(data.channel).send(messageEmbed(data, Discord))
 }
 
 // exports.createUser =  function (req, res) {

@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('../config.json');
 
+const messageEmbed = require('./messageEmbed') 
+
 client.once('ready', () => {
    console.log('Ready!');
    client.user.setActivity(`you`, { type: 'LISTENING' });
@@ -10,7 +12,7 @@ client.once('ready', () => {
 
 client.login(config.token);
 
-module.exports = { client };
+module.exports = { client, Discord, messageEmbed };
 
 
-
+// // inside a command, event listener, etc.
