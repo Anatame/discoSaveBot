@@ -8,7 +8,7 @@ module.exports = function messageEmbed(data, Discord) {
       .setColor('#0099ff')
       .setAuthor(data.messageData.authorUsername, data.messageData.authorAvatar, data.messageData.baseURI)
       .setDescription(data.messageData.message)
-      .addField("Message Source", `[• Jump!](${data.messageData.baseURI})`)
+      .addField("Source", `[• Jump!](${data.messageData.baseURI})`)
 
       .setTimestamp()
    
