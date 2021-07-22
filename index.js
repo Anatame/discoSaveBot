@@ -2,7 +2,7 @@ const {
 	client
 } = require("./utils/discord");
 const db = require("./models");
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const fastify = require("fastify")({
 	logger: true
 });
