@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.set("debug", true);
-mongoose.connect("mongodb://localhost/discoSaveBeta", {
+mongoose.connect(process.env.dbURL || "mongodb://localhost/discoSaveBeta", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
