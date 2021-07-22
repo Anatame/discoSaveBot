@@ -10,7 +10,7 @@ client.once('ready', () => {
 });
 
 
-client.login(config.token || process.env.token);
+client.login( process.env.token);
 
 module.exports = { client, Discord, messageEmbed };
 
