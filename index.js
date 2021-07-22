@@ -57,7 +57,8 @@ fastify.register(require("./routes/users"));
 
 const start = async () => {
 	try {
-		await fastify.listen(process.env.PORT || 5000);
+		await fastify.listen(process.env.PORT || 5000, process.env.HOST || '::');
+		console.log(`server listening on ${fastify.server.address().port}`)
 	} catch (err) {
 		fastify.log.error(err);
 		process.exit(1);
